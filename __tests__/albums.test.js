@@ -109,7 +109,7 @@ describe('GET /artists/:artistId/albums', () => {
         done();
       });
     });
-  }); //done
+  });
 
 describe('GET /albums', () => {
   it('gets all album records', (done) => {
@@ -124,7 +124,7 @@ describe('GET /albums', () => {
         done();
       });
   });
-}); //done
+});
 
 
 describe('PATCH /albums/:albumId', () => {

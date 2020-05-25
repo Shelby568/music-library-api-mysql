@@ -16,6 +16,9 @@ const updateAlbum = require('./controllers/albums');
 const deleteAlbum = require('./controllers/albums');
 
 const createSong = require('./controllers/songs');
+const findSongs = require('./controllers/songs');
+const updateSongs = require('./controllers/songs');
+const deleteSongs = require('./controllers/songs');
 
 const app = express();
 
@@ -42,5 +45,11 @@ app.patch('/albums/:id', updateAlbum.updateAlbumById);
 app.delete('/albums/:id', deleteAlbum.deleteAlbumById);
 
 app.post('/album/:albumId/song', createSong.createSong);
+
+app.get('/album/:albumId/song', findSongs.findAllSongs);
+
+app.patch('/album/:id/song', updateSongs.updateSongById);
+
+app.delete('/album/:id/song', deleteSongs.deleteSongById);
 
 module.exports = app;

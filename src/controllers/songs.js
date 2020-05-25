@@ -23,3 +23,39 @@ exports.createSong = (req, res) => {
       };
   });
 };
+
+exports.findAllSongs = (req, res) => {
+  Song.findAll().then(song => {
+    if (!song) {
+      res.status(404).json({ error: 'The album does not exist.'});
+    } else {
+      res.status(200).json(song);
+  };
+});
+};
+
+exports.updateSongById = (req, res) => {
+  const { id } = req.params;
+  console.log(id, 'albumId');
+  Song.update(req.body, { where: { id } }).then(([rowsUpdated]) => {
+    if (!rowsUpdated) {
+      res.status(404).json({ error: 'The song could not be found.' });
+    } else {
+      res.status(200).json(rowsUpdated);
+      console.log(rowsUpdated, 'rowupdated');
+    };
+  });
+};
+
+exports.deleteSongById = (req, res) => {
+  const { id } = req.params;
+  Song.findByPk(id).then(song => {
+    if (!song) {
+      res.status(404).json({error: 'The song could not be found.'});
+    } else {
+      Song.destroy({where: { id } }).then(deletedRow => {
+        res.status(204).json(deletedRow);
+      });
+    };
+  });
+};
