@@ -104,7 +104,6 @@ describe('/songs', () => {
   describe('PATCH /album/:albumId/song', () => {
     it('updates song name by id', (done) => {
       const song = songs[0];
-      console.log(song, 'song');
       request(app)
         .patch(`/album/${song.id}/song`)
         .send({ name: 'New Song' })
@@ -141,11 +140,7 @@ describe('DELETE /album/:albumId/song', () => {
           done();
         });
       });
+    });
   });
 });
-
-
-
-
-}); // promise all
-  });
+});

@@ -7,7 +7,6 @@ exports.createSong = (req, res) => {
   const { albumId } = req.params;
 
   Album.findByPk(albumId).then(album => {
-    console.log(albumId, 'album id');
     if (!album) {
       res.status(404).json({ error: 'The album could not be found.' });
     } else {
@@ -17,7 +16,6 @@ exports.createSong = (req, res) => {
         albumId: parseInt(albumId),
       };
       Song.create(newSong).then((song) => {
-        console.log(newSong, 'new song');
         res.status(201).json(song);
       });
       };
@@ -36,13 +34,11 @@ exports.findAllSongs = (req, res) => {
 
 exports.updateSongById = (req, res) => {
   const { id } = req.params;
-  console.log(id, 'albumId');
   Song.update(req.body, { where: { id } }).then(([rowsUpdated]) => {
     if (!rowsUpdated) {
       res.status(404).json({ error: 'The song could not be found.' });
     } else {
       res.status(200).json(rowsUpdated);
-      console.log(rowsUpdated, 'rowupdated');
     };
   });
 };

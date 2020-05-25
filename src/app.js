@@ -2,54 +2,16 @@ const express = require('express');
 
 const artistRouter = require('./routes/artist');
 const albumRouter = require('./routes/album');
-
-const artistControllers = require('./controllers/artists');
-const list = require('./controllers/artists');
-const getArtist = require('./controllers/artists');
-const updateArtist = require('./controllers/artists');
-const deleteArtist = require('./controllers/artists');
-
-const createAlbum = require('./controllers/albums');
-const findAlbum = require('./controllers/albums');
-const findAllAlbums = require('./controllers/albums');
-const updateAlbum = require('./controllers/albums');
-const deleteAlbum = require('./controllers/albums');
-
-const createSong = require('./controllers/songs');
-const findSongs = require('./controllers/songs');
-const updateSongs = require('./controllers/songs');
-const deleteSongs = require('./controllers/songs');
+const songRouter = require('./routes/song');
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/artists', artistControllers.create);
+app.use('/artists', artistRouter);
 
-app.get('/artists', list.findAll);
+app.use('/albums', albumRouter);
 
-app.get('/artists/:id', getArtist.getArtistById);
-
-app.patch('/artists/:id', updateArtist.updateArtistById);
-
-app.delete('/artists/:id', deleteArtist.deleteArtistById);
-
-app.post('/artists/:artistId/albums', createAlbum.albumCreate);
-
-app.get('/artists/:id/albums', findAlbum.getAlbumsById);
-
-app.get('/albums', findAllAlbums.getAllAlbums);
-
-app.patch('/albums/:id', updateAlbum.updateAlbumById);
-
-app.delete('/albums/:id', deleteAlbum.deleteAlbumById);
-
-app.post('/album/:albumId/song', createSong.createSong);
-
-app.get('/album/:albumId/song', findSongs.findAllSongs);
-
-app.patch('/album/:id/song', updateSongs.updateSongById);
-
-app.delete('/album/:id/song', deleteSongs.deleteSongById);
+app.use('/album', songRouter);
 
 module.exports = app;
